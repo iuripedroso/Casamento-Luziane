@@ -1,0 +1,14 @@
+CONVITE + CONFIRMAÇÕES NA VERCEL
+
+index.html   -> o convite
+lista.html   -> página dos noivos (pede senha) com os confirmados
+api/rsvp.js  -> função que salva e lê as confirmações
+
+1. Suba esta pasta num repositório do GitHub e importe na Vercel (Add New > Project).
+2. No projeto da Vercel: Storage > Create Database > Upstash for Redis (plano Free) > Connect.
+   Isso cria sozinho as variáveis KV_REST_API_URL e KV_REST_API_TOKEN.
+3. Settings > Environment Variables > adicione SENHA_LISTA com a senha que quiser.
+4. Deployments > Redeploy (para a função enxergar as variáveis novas).
+
+Convite:  https://seu-projeto.vercel.app
+Lista:    https://seu-projeto.vercel.app/lista.html
