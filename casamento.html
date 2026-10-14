@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Convite Luziane e Anderson</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blush-50: #fdf3f0;
+    --blush-100: #f7e4de;
+    --blush-300: #e8b7a9;
+    --blush-500: #cf8a75;
+    --blush-700: #a85f4a;
+    --blush-900: #5c3325;
+    --gold: #b8935f;
+    --cream: #fffaf5;
+    --cream-glass: rgba(255, 250, 245, 0.86);
+    --text-dark: #4a3c33;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--text-dark);
+    background: #f4e6d8;
+    min-height: 100%;
+    overflow-x: hidden;
+  }
+
+  .bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    max-width: none;
+  }
+
+  .bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255,250,245,0.15) 0%, rgba(255,250,245,0.05) 45%, rgba(255,250,245,0.35) 100%);
+  }
+
+  .hearts {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .heart {
+    position: absolute;
+    top: 100%;
+    border-radius: 50%;
+    transform: rotate(-45deg);
+    animation-name: rise;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+  }
+
+  .heart::before,
+  .heart::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: inherit;
+  }
+
+  .heart::before { top: -50%; left: 0; }
+  .heart::after { top: 0; left: 50%; }
+
+  @keyframes rise {
+    from { top: 100%; opacity: 0.85; }
+    to   { top: -12%; opacity: 0; }
+  }
+
+  .stage {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: max(32px, env(safe-area-inset-top, 0px)) 20px max(32px, env(safe-area-inset-bottom, 0px));
+    overflow: hidden;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    position: relative;
+  }
+
+  /* ---------- ETAPA 1: PRELÚDIO (máquina de escrever) ---------- */
+
+  #prelude-stage.hidden { display: none; }
+
+  #prelude-stage {
+    background: var(--cream-glass);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(232, 183, 169, 0.6);
+    border-radius: 14px;
+    padding: 44px 30px 36px;
+    box-shadow: 0 20px 50px rgba(92, 51, 37, 0.2);
+  }
+
+  .eyebrow {
+    font-family: 'Great Vibes', cursive;
+    font-size: 40px;
+    color: var(--blush-900);
+  }
+
+  .eyebrow-rule {
+    width: 130px;
+    height: 12px;
+    margin: -4px auto 22px;
+  }
+
+  .eyebrow-rule svg { width: 100%; height: 100%; display: block; }
+  .eyebrow-rule path { stroke: var(--gold); stroke-width: 1; fill: none; }
+  .eyebrow-rule circle { fill: var(--gold); }
+
+  #typewriter {
+    font-size: 19px;
+    font-style: italic;
+    line-height: 1.85;
+    color: var(--text-dark);
+    min-height: 190px;
+    margin: 0;
+  }
+
+  .caret {
+    display: inline-block;
+    width: 1px;
+    margin-left: 2px;
+    background: var(--blush-700);
+    animation: blink 0.9s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .reveal-btn,
+  .soft-btn {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--blush-900);
+    padding: 12px 30px;
+    border: 1px solid rgba(184, 147, 95, 0.55);
+    border-radius: 999px;
+    background: rgba(255, 250, 245, 0.55);
+    cursor: pointer;
+  }
+
+  .reveal-btn {
+    margin-top: 26px;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    pointer-events: none;
+  }
+
+  .reveal-btn.show {
+    opacity: 1;
+    transform: translateY(0);
+    animation: pulse 2.2s ease-in-out infinite;
+    pointer-events: auto;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.85; }
+    50% { opacity: 1; }
+  }
+
+  /* ---------- ETAPA 2: CARTA COM TRÊS FOLHAS ---------- */
+
+  #letter {
+    display: none;
+    position: relative;
+    animation: card-reveal 0.7s ease;
+  }
+
+  #letter.open { display: grid; }
+
+  @keyframes card-reveal {
+    from { opacity: 0; transform: translateY(12px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .sheet {
+    grid-area: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: safe center;
+    height: min(560px, calc(100svh - 110px));
+    min-height: 420px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    border: 1px solid rgba(232, 183, 169, 0.6);
+    border-radius: 14px;
+    padding: 28px 22px 22px;
+    box-shadow: 0 20px 50px rgba(92, 51, 37, 0.2);
+    transition: transform 0.5s cubic-bezier(.2,.8,.2,1), opacity 0.45s ease;
+  }
+
+  /* cada folha começa levemente torta, como papéis empilhados */
+  .sheet-front { z-index: 3; background: #fffaf5; }
+  .sheet-where { z-index: 2; background: #fdf3f0; transform: rotate(3deg) translate(8px, 10px); }
+  .sheet-gifts { z-index: 1; background: #faeee8; transform: rotate(-3.5deg) translate(-8px, 16px); }
+
+  .sheet.is-current { transform: none; }
+
+  .sheet.is-gone {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .sheet.draggable {
+    cursor: grab;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .sheet.dragging {
+    transition: none;
+    cursor: grabbing;
+  }
+
+  .sheet:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 4px;
+  }
+
+  .invite-eyebrow {
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--blush-500);
+    margin-bottom: 12px;
+  }
+
+  .sheet::-webkit-scrollbar { display: none; }
+
+  .names {
+    font-family: 'Great Vibes', cursive;
+    font-size: 44px;
+    color: var(--blush-900);
+    line-height: 1.3;
+  }
+
+  .and {
+    font-size: 16px;
+    color: var(--gold);
+    margin: 4px 0;
+    letter-spacing: 2px;
+  }
+
+  .invite-msg {
+    font-size: 18px;
+    color: var(--text-dark);
+    margin: 18px 0;
+    line-height: 1.6;
+  }
+
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 16px auto;
+    flex-shrink: 0;
+  }
+
+  .footer-note {
+    font-family: 'Great Vibes', cursive;
+    font-size: 24px;
+    color: var(--blush-700);
+    margin-top: 8px;
+  }
+
+  .swipe-hint {
+    margin-top: 16px;
+    font-size: 13px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--blush-500);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .swipe-hint .arrow {
+    display: inline-block;
+    color: var(--gold);
+    animation: nudge 1.6s ease-in-out infinite;
+  }
+
+  .swipe-hint .arrow.left { animation-name: nudge-left; }
+
+  @keyframes nudge {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
+  }
+
+  @keyframes nudge-left {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(-5px); }
+  }
+
+  .sheet-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 38px;
+    color: var(--blush-900);
+    line-height: 1.2;
+  }
+
+  /* ---------- folha 2: quando & onde ---------- */
+
+  .date-line {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--blush-900);
+    margin-top: 6px;
+  }
+
+  .schedule {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .schedule li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding: 8px 0;
+    font-size: 18px;
+    border-bottom: 1px dashed rgba(184, 147, 95, 0.4);
+  }
+
+  .schedule .right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .see-btn {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--blush-900);
+    padding: 4px 12px;
+    border: 1px solid rgba(184, 147, 95, 0.6);
+    border-radius: 999px;
+    background: rgba(255, 250, 245, 0.7);
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .see-btn:hover,
+  .see-btn:focus-visible {
+    background: var(--gold);
+    color: #fff;
+    outline: none;
+  }
+
+  .schedule li:last-child { border-bottom: none; }
+
+  .schedule .label {
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: var(--blush-700);
+  }
+
+  .schedule .time {
+    font-weight: 600;
+    color: var(--text-dark);
+  }
+
+  .place-name {
+    font-size: 21px;
+    font-weight: 600;
+    color: var(--blush-900);
+  }
+
+  .place-address {
+    font-size: 17px;
+    line-height: 1.5;
+    margin: 2px 0 14px;
+  }
+
+  .map-btn {
+    display: inline-block;
+    align-self: center;
+    text-decoration: none;
+  }
+
+  .go-back {
+    display: block;
+    flex-shrink: 0;
+    margin: 12px auto 0;
+    font-size: 12px;
+    padding: 8px 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+
+  .sheet.is-current .go-back {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* ---------- folha 3: presentes + confirmação ---------- */
+
+  .gifts-intro {
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.4;
+    margin: 2px 0 10px;
+  }
+
+  /* carrossel horizontal de presentes */
+  .gift-grid {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    margin: 0 -22px;
+    padding: 4px 22px 8px;
+    flex-shrink: 0;
+  }
+
+  .gift-grid::-webkit-scrollbar { display: none; }
+
+  .gift {
+    flex: 0 0 118px;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 12px 8px 10px;
+    border: 1px solid rgba(184, 147, 95, 0.35);
+    border-radius: 12px;
+    background: rgba(255, 250, 245, 0.75);
+    font-family: inherit;
+    color: inherit;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .gift:hover,
+  .gift:focus-visible {
+    transform: translateY(-2px);
+    border-color: var(--gold);
+    box-shadow: 0 8px 18px rgba(92, 51, 37, 0.12);
+    outline: none;
+  }
+
+  .gift .g-icon { font-size: 22px; line-height: 1.2; }
+  .gift .g-name { font-size: 15px; font-weight: 600; color: var(--blush-900); line-height: 1.2; }
+  .gift .g-price { font-size: 14px; color: var(--blush-700); }
+  .gift .g-cta {
+    margin-top: 4px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .pix-box {
+    flex-shrink: 0;
+    margin-top: 6px;
+    padding: 10px 14px;
+    border: 1px dashed rgba(184, 147, 95, 0.6);
+    border-radius: 12px;
+    background: rgba(255, 250, 245, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    text-align: left;
+  }
+
+  .pix-box .pix-label {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blush-700);
+  }
+
+  .pix-box .pix-key {
+    font-size: 16px;
+    font-weight: 600;
+    word-break: break-all;
+  }
+
+  .pix-copy {
+    flex-shrink: 0;
+    font-size: 12px;
+    padding: 9px 16px;
+    letter-spacing: 1.5px;
+  }
+
+  .rsvp-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 30px;
+    color: var(--blush-900);
+    line-height: 1.2;
+  }
+
+  .rsvp-until {
+    font-size: 14px;
+    font-style: italic;
+    color: var(--blush-700);
+    margin: 0 0 10px;
+  }
+
+  .rsvp-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .rsvp-row {
+    display: flex;
+    gap: 10px;
+  }
+
+  .rsvp-form input,
+  .rsvp-form select {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    color: var(--text-dark);
+    padding: 9px 12px;
+    border: 1px solid rgba(184, 147, 95, 0.5);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.85);
+    min-width: 0;
+  }
+
+  .rsvp-form input { flex: 1; }
+  .rsvp-form select { width: 112px; }
+
+  .rsvp-form input:focus,
+  .rsvp-form select:focus {
+    outline: none;
+    border-color: var(--blush-500);
+    box-shadow: 0 0 0 3px rgba(207, 138, 117, 0.2);
+  }
+
+  .rsvp-form input.shake { animation: shake 0.4s ease; border-color: var(--blush-700); }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+  }
+
+  .confirm-btn {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    white-space: nowrap;
+    text-transform: uppercase;
+    color: #fff;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--blush-500), var(--blush-700));
+    box-shadow: 0 10px 22px rgba(168, 95, 74, 0.35);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .confirm-btn:hover { transform: translateY(-1px); box-shadow: 0 14px 26px rgba(168, 95, 74, 0.4); }
+  .confirm-btn:active { transform: translateY(1px); }
+
+  .decline-link {
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--blush-700);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  /* ---------- eventos (folha 2) ---------- */
+
+  .events {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .event {
+    padding: 14px 16px;
+    border: 1px solid rgba(184, 147, 95, 0.35);
+    border-radius: 12px;
+    background: rgba(255, 250, 245, 0.6);
+  }
+
+  .event-label {
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--blush-700);
+  }
+
+  .event-place {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--blush-900);
+    line-height: 1.3;
+    margin-top: 4px;
+  }
+
+  .event-address {
+    font-size: 16px;
+    line-height: 1.45;
+    margin-top: 4px;
+  }
+
+  .event-time {
+    font-size: 15px;
+    font-style: italic;
+    color: var(--gold);
+    margin-top: 4px;
+  }
+
+  /* ---------- pix (folha 3) ---------- */
+
+  .pix-text {
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 4px 0 12px;
+  }
+
+  .pix-text strong {
+    color: var(--blush-900);
+    font-weight: 600;
+  }
+
+  .pix-card {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    text-align: left;
+    padding: 12px 14px;
+    border: 1px solid rgba(184, 147, 95, 0.55);
+    border-radius: 14px;
+    background: linear-gradient(160deg, rgba(255, 250, 245, 0.95), rgba(247, 228, 222, 0.85));
+    box-shadow: 0 8px 20px rgba(92, 51, 37, 0.08);
+  }
+
+  .pix-card .pix-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--gold);
+    padding: 2px 12px;
+    border-radius: 999px;
+  }
+
+  .pix-card .pix-number {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--blush-900);
+    margin: 6px 0 0;
+    white-space: nowrap;
+  }
+
+  .pix-card .pix-type {
+    font-size: 14px;
+    font-style: italic;
+    color: var(--blush-700);
+  }
+
+  .pix-card .pix-copy {
+    flex-shrink: 0;
+    font-size: 12px;
+    padding: 8px 16px;
+    letter-spacing: 2px;
+  }
+
+  .sheet-gifts .divider { margin: 14px auto; }
+  .sheet-gifts .sheet-title { font-size: 36px; }
+
+  /* indicador de folhas */
+  .dots {
+    display: none;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 28px;
+  }
+
+  .dots.show { display: flex; }
+
+  .dots span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255, 250, 245, 0.7);
+    border: 1px solid var(--gold);
+    transition: background 0.3s ease, width 0.3s ease;
+  }
+
+  .dots span.active {
+    width: 20px;
+    border-radius: 999px;
+    background: var(--gold);
+  }
+
+  /* aviso flutuante */
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: max(28px, env(safe-area-inset-bottom, 0px));
+    z-index: 10;
+    transform: translate(-50%, 20px);
+    opacity: 0;
+    pointer-events: none;
+    padding: 12px 22px;
+    border-radius: 999px;
+    background: var(--blush-900);
+    color: var(--cream);
+    font-size: 16px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    max-width: calc(100% - 32px);
+    text-align: center;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #letter { animation: none; }
+    .caret { animation: none; }
+    .reveal-btn.show { animation: none; }
+    .swipe-hint .arrow { animation: none; }
+    .sheet { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg"><img src="https://github.com/iuripedroso/ConviteDeCasamento/blob/main/img2.jpg?raw=true" alt=""></div>
+<div class="hearts" id="hearts"></div>
+
+<div class="stage">
+  <div class="card">
+
+    <div id="prelude-stage">
+      <div class="eyebrow">Convite especial</div>
+      <div class="eyebrow-rule">
+        <svg viewBox="0 0 130 12" preserveAspectRatio="none">
+          <path d="M0 6 H54" />
+          <circle cx="65" cy="6" r="3" />
+          <path d="M76 6 H130" />
+        </svg>
+      </div>
+
+      <p id="typewriter"></p>
+
+      <button class="reveal-btn" id="reveal-btn" onclick="openInvite()">Abrir o convite</button>
+    </div>
+
+    <div id="letter">
+
+      <!-- FOLHA 3 (fundo): presentes + confirmação -->
+      <div class="sheet sheet-gifts" id="sheet-gifts">
+        <div class="sheet-title">Presentes</div>
+        <p class="pix-text">Caso deseje nos presentear, disponibilizamos a opção de contribuição via Pix, com valor sugerido a partir de <strong>R$&nbsp;100,00</strong>.</p>
+
+        <div class="pix-card">
+          <div>
+            <span class="pix-tag">Pix</span>
+            <div class="pix-number" id="pix-key"></div>
+            <div class="pix-type">chave CPF</div>
+          </div>
+          <button class="soft-btn pix-copy" id="pix-copy" type="button">Copiar</button>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="rsvp-title">Confirme sua presença</div>
+        <div class="rsvp-until" id="rsvp-until"></div>
+
+        <form class="rsvp-form" id="rsvp-form" novalidate>
+          <div class="rsvp-row">
+            <input type="text" id="rsvp-name" placeholder="Seu nome" autocomplete="name" aria-label="Seu nome">
+            <select id="rsvp-qty" aria-label="Quantas pessoas">
+              <option value="1">1 pessoa</option>
+              <option value="2">2 pessoas</option>
+              <option value="3">3 pessoas</option>
+              <option value="4">4 pessoas</option>
+              <option value="5">5 pessoas</option>
+            </select>
+          </div>
+          <button class="confirm-btn" type="submit">&#128141; Confirmar presença</button>
+          <button class="decline-link" id="rsvp-decline" type="button">Infelizmente não poderei ir</button>
+        </form>
+
+        <button class="soft-btn go-back" type="button" data-back>&#8634; Voltar</button>
+      </div>
+
+      <!-- FOLHA 2: quando & onde -->
+      <div class="sheet sheet-where" id="sheet-where">
+        <div class="sheet-title">Data: 19/12/2026</div>
+        <div class="date-line" id="info-data"></div>
+
+        <div class="divider"></div>
+
+        <div class="events" id="info-eventos"></div>
+
+        <div class="swipe-hint">
+          <span class="arrow left">&larr;</span>
+          arraste para os presentes
+          <span class="arrow">&rarr;</span>
+        </div>
+
+        <button class="soft-btn go-back" type="button" data-back>&#8634; Voltar</button>
+      </div>
+
+      <!-- FOLHA 1 (topo): mensagem -->
+      <div class="sheet sheet-front" id="sheet-front"
+           aria-label="Convite. Arraste para o lado ou use as setas para continuar.">
+        <div class="invite-eyebrow">Convite especial</div>
+        <div class="names">Luziane</div>
+        <div class="and">&amp;</div>
+        <div class="names">Anderson</div>
+
+        <p class="invite-msg">convidam vocês, com muito carinho para<br>celebrar o seu casamento</p>
+
+        <div class="divider"></div>
+
+        <div class="footer-note">Sua presença é o maior presente</div>
+
+        <div class="swipe-hint">
+          <span class="arrow left">&larr;</span>
+          arraste para ver o local
+          <span class="arrow">&rarr;</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="dots" id="dots" aria-hidden="true"><span></span><span></span><span></span></div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+  // =========================================================
+  //  EDITE AQUI: data, horários, local, presentes e confirmação
+  // =========================================================
+  var INFO = {
+    data: "ÀS 17:00",               // ex.: "Sábado, 14 de março de 2027"
+
+    eventos: [
+      {
+        label: "Cerimônia",
+        local: "Paróquia Santa Cruz",
+        endereco: "",
+        hora: ""                            // ex.: "16h00"
+      },
+      {
+        label: "Recepção",
+        local: "ASSERVIS – Associação da Surg",
+        endereco: "R. Perimetral Norte, 662-752 – Morro Alto, Guarapuava – PR, 85067-100",
+        hora: ""                            // ex.: "18h30"
+      }
+    ],
+    pix: "055.723.089-60",                  // como aparece no convite
+    pixCopiar: "05572308960",               // o que vai para a área de transferência
+
+    // Confirmação via WhatsApp: só números, com 55 + DDD. ex.: "5542999998888"
+    whatsapp: "",
+    confirmarAte: "Confirme até a data a combinar"  // ex.: "Confirme até 1º de março"
+  };
+
+  // ---------- preenche as folhas ----------
+  (function fillInfo() {
+    document.getElementById('info-data').textContent = INFO.data;
+
+    var box = document.getElementById('info-eventos');
+    INFO.eventos.forEach(function (ev) {
+      var el = document.createElement('div');
+      el.className = 'event';
+      var html = '<div class="event-label"></div><div class="event-place"></div>';
+      if (ev.endereco) html += '<div class="event-address"></div>';
+      if (ev.hora) html += '<div class="event-time"></div>';
+      el.innerHTML = html;
+      el.querySelector('.event-label').textContent = ev.label;
+      el.querySelector('.event-place').textContent = ev.local;
+      if (ev.endereco) el.querySelector('.event-address').textContent = ev.endereco;
+      if (ev.hora) el.querySelector('.event-time').textContent = 'às ' + ev.hora;
+      box.appendChild(el);
+    });
+
+    document.getElementById('pix-key').textContent = INFO.pix;
+    document.getElementById('rsvp-until').textContent = INFO.confirmarAte;
+  })();
+
+  // ---------- aviso flutuante ----------
+  var toastTimer;
+  function showToast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.classList.remove('show'); }, 2600);
+  }
+
+  // ---------- copiar PIX ----------
+  function copyPix(msg) {
+    var text = INFO.pixCopiar || INFO.pix;
+    function fallback() {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      ta.remove();
+      showToast(msg);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { showToast(msg); }, fallback);
+    } else {
+      fallback();
+    }
+  }
+
+  document.getElementById('pix-copy').addEventListener('click', function () {
+    copyPix('Chave Pix copiada! Obrigado pelo carinho 💛');
+  });
+
+  // ---------- confirmação por WhatsApp ----------
+  function sendWhatsApp(text) {
+    if (!INFO.whatsapp) {
+      showToast('O número de WhatsApp ainda não foi configurado.');
+      return;
+    }
+    window.open('https://wa.me/' + INFO.whatsapp + '?text=' + encodeURIComponent(text), '_blank');
+  }
+
+  document.getElementById('rsvp-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var input = document.getElementById('rsvp-name');
+    var nome = input.value.trim();
+    if (!nome) {
+      input.classList.remove('shake');
+      void input.offsetWidth;
+      input.classList.add('shake');
+      input.focus();
+      showToast('Escreva seu nome para confirmar 😊');
+      return;
+    }
+    var qtd = document.getElementById('rsvp-qty').value;
+    var pessoas = qtd === '1' ? '1 pessoa' : qtd + ' pessoas';
+    sendWhatsApp('Olá! Aqui é ' + nome + '. Confirmo presença no casamento de Luziane & Anderson 💍 (' + pessoas + ').');
+  });
+
+  document.getElementById('rsvp-decline').addEventListener('click', function () {
+    var nome = document.getElementById('rsvp-name').value.trim();
+    sendWhatsApp('Olá! ' + (nome ? 'Aqui é ' + nome + '. ' : '') +
+      'Infelizmente não poderei ir ao casamento de Luziane & Anderson, mas desejo toda a felicidade do mundo a vocês! 💛');
+  });
+
+  // ---------- corações flutuando ----------
+  (function () {
+    var layer = document.getElementById('hearts');
+    var colors = [
+      'rgba(207, 138, 117, 0.55)',
+      'rgba(184, 147, 95, 0.5)',
+      'rgba(168, 95, 74, 0.4)',
+      'rgba(232, 183, 169, 0.6)'
+    ];
+    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) return;
+
+    function spawnHeart() {
+      var el = document.createElement('div');
+      var size = 8 + Math.random() * 20;
+      var left = Math.random() * 100;
+      var duration = 7 + Math.random() * 7;
+      el.className = 'heart';
+      el.style.width = size + 'px';
+      el.style.height = size + 'px';
+      el.style.left = left + '%';
+      el.style.background = colors[Math.floor(Math.random() * colors.length)];
+      el.style.animationDuration = duration + 's';
+      el.addEventListener('animationend', function () { el.remove(); });
+      layer.appendChild(el);
+    }
+
+    for (var i = 0; i < 4; i++) setTimeout(spawnHeart, i * 400);
+    setInterval(spawnHeart, 900);
+  })();
+
+  // ---------- máquina de escrever ----------
+  (function () {
+    var lines = [
+      "Existem histórias que a gente escreve sozinho,",
+      "e outras que só fazem sentido a dois.",
+      "",
+      "A nossa começou num encontro qualquer",
+      "e foi virando rotina, cumplicidade e lar.",
+      "",
+      "Agora queremos contar o próximo capítulo",
+      "ao lado das pessoas que amamos.",
+      "",
+      "Vem com a gente celebrar esse “sim”?"
+    ];
+    var text = lines.join('\n');
+    var target = document.getElementById('typewriter');
+    var btn = document.getElementById('reveal-btn');
+    var caret = document.createElement('span');
+    caret.className = 'caret';
+    caret.innerHTML = '&nbsp;';
+    target.appendChild(caret);
+
+    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function finish() {
+      target.innerHTML = text.replace(/\n/g, '<br>');
+      btn.classList.add('show');
+    }
+
+    if (reduced) {
+      finish();
+      return;
+    }
+
+    var i = 0;
+    var speed = 32;
+    function type() {
+      if (i < text.length) {
+        var ch = text.charAt(i);
+        var node = document.createTextNode(ch === '\n' ? '' : ch);
+        if (ch === '\n') target.insertBefore(document.createElement('br'), caret);
+        target.insertBefore(node, caret);
+        i++;
+        setTimeout(type, speed);
+      } else {
+        btn.classList.add('show');
+      }
+    }
+    type();
+  })();
+
+  function openInvite() {
+    document.getElementById('prelude-stage').classList.add('hidden');
+    document.getElementById('letter').classList.add('open');
+    document.getElementById('dots').classList.add('show');
+  }
+
+  // ---------- pilha de folhas arrastáveis ----------
+  (function () {
+    // ordem de leitura: mensagem → quando & onde → presentes
+    var sheets = [
+      document.getElementById('sheet-front'),
+      document.getElementById('sheet-where'),
+      document.getElementById('sheet-gifts')
+    ];
+    var dots = document.querySelectorAll('#dots span');
+    var current = 0;
+
+    function render() {
+      sheets.forEach(function (s, i) {
+        var isCurrent = i === current;
+        var canDrag = isCurrent && i < sheets.length - 1;
+        s.classList.toggle('is-current', isCurrent);
+        s.classList.toggle('is-gone', i < current);
+        s.classList.toggle('draggable', canDrag);
+        if (i < current) s.setAttribute('aria-hidden', 'true'); else s.removeAttribute('aria-hidden');
+        if (canDrag) s.setAttribute('tabindex', '0'); else s.removeAttribute('tabindex');
+      });
+      dots.forEach(function (d, i) { d.classList.toggle('active', i === current); });
+    }
+
+    function next(dir) {
+      if (current >= sheets.length - 1) return;
+      var s = sheets[current];
+      var w = s.offsetWidth;
+      s.style.transform = 'translateX(' + (dir * (w + 120)) + 'px) rotate(' + (dir * 16) + 'deg)';
+      current++;
+      render();
+    }
+
+    function prev() {
+      if (current === 0) return;
+      current--;
+      sheets[current].style.transform = '';
+      render();
+      sheets[current].focus({ preventScroll: true });
+    }
+
+    sheets.forEach(function (s) {
+      var startX = 0, startY = 0, dx = 0, dragging = false;
+
+      s.addEventListener('pointerdown', function (e) {
+        if (!s.classList.contains('draggable')) return;
+        if (e.target.closest('a, button, input, select')) return;
+        dragging = true;
+        startX = e.clientX;
+        startY = e.clientY;
+        dx = 0;
+        s.setPointerCapture(e.pointerId);
+        s.classList.add('dragging');
+      });
+
+      s.addEventListener('pointermove', function (e) {
+        if (!dragging) return;
+        dx = e.clientX - startX;
+        var dy = (e.clientY - startY) * 0.15;
+        s.style.transform = 'translate(' + dx + 'px,' + dy + 'px) rotate(' + (dx / 18) + 'deg)';
+      });
+
+      function endDrag() {
+        if (!dragging) return;
+        dragging = false;
+        s.classList.remove('dragging');
+        if (Math.abs(dx) > s.offsetWidth * 0.28) {
+          next(dx > 0 ? 1 : -1);
+        } else {
+          s.style.transform = '';
+        }
+      }
+
+      s.addEventListener('pointerup', endDrag);
+      s.addEventListener('pointercancel', endDrag);
+
+      s.addEventListener('keydown', function (e) {
+        if (!s.classList.contains('draggable') || e.target !== s) return;
+        if (e.key === 'ArrowRight' || e.key === 'Enter' || e.key === ' ') { e.preventDefault(); next(1); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); next(-1); }
+      });
+    });
+
+    document.querySelectorAll('[data-back]').forEach(function (b) {
+      b.addEventListener('click', prev);
+    });
+
+    render();
+  })();
+</script>
+</body>
+</html>
