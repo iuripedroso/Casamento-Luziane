@@ -667,6 +667,23 @@
     margin-top: 4px;
   }
 
+  .dress-code {
+    flex-shrink: 0;
+    margin-top: 14px;
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--blush-900);
+  }
+
+  .dress-code span {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--blush-700);
+  }
+
   /* ---------- pix (folha 3) ---------- */
 
   .pix-text {
@@ -682,16 +699,19 @@
 
   .pix-card {
     flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
     text-align: left;
     padding: 12px 14px;
     border: 1px solid rgba(184, 147, 95, 0.55);
     border-radius: 14px;
     background: linear-gradient(160deg, rgba(255, 250, 245, 0.95), rgba(247, 228, 222, 0.85));
     box-shadow: 0 8px 20px rgba(92, 51, 37, 0.08);
+  }
+
+  .pix-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
   }
 
   .pix-card .pix-tag {
@@ -707,17 +727,21 @@
   }
 
   .pix-card .pix-number {
-    font-size: 22px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    font-variant-numeric: lining-nums tabular-nums;
+    font-size: 20px;
     font-weight: 600;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     color: var(--blush-900);
     margin: 6px 0 0;
     white-space: nowrap;
   }
 
   .pix-card .pix-type {
-    font-size: 14px;
-    font-style: italic;
+    font-size: 13px;
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px dashed rgba(184, 147, 95, 0.4);
     color: var(--blush-700);
   }
 
@@ -819,6 +843,15 @@
     transform: translate(-50%, 0);
   }
 
+  /* celulares mais estreitos */
+  @media (max-width: 380px) {
+    .sheet { padding-left: 18px; padding-right: 18px; }
+    .pix-card { padding: 12px; }
+    .pix-card .pix-number { font-size: 18px; letter-spacing: 0; }
+    .pix-card .pix-copy { padding: 8px 12px; letter-spacing: 1px; }
+    .confirm-btn { font-size: 15px; letter-spacing: 1px; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     #letter { animation: none; }
     .caret { animation: none; }
@@ -859,12 +892,14 @@
         <p class="pix-text">Caso deseje nos presentear, disponibilizamos a opção de contribuição via Pix, com valor sugerido a partir de <strong>R$&nbsp;100,00</strong>.</p>
 
         <div class="pix-card">
-          <div>
-            <span class="pix-tag">Pix</span>
-            <div class="pix-number" id="pix-key"></div>
-            <div class="pix-type">chave CPF</div>
+          <div class="pix-row">
+            <div>
+              <span class="pix-tag">Pix</span>
+              <div class="pix-number" id="pix-key"></div>
+            </div>
+            <button class="soft-btn pix-copy" id="pix-copy" type="button">Copiar</button>
           </div>
-          <button class="soft-btn pix-copy" id="pix-copy" type="button">Copiar</button>
+          <div class="pix-type">Chave CPF (Luziane B. B. Pedroso)</div>
         </div>
 
         <div class="divider"></div>
@@ -907,6 +942,8 @@
 
         <div class="events" id="info-eventos"></div>
 
+        <div class="dress-code"><span>Traje</span>Esporte Fino</div>
+
         <div class="swipe-hint">
           <span class="arrow left">&larr;</span>
           arraste para os presentes
@@ -924,7 +961,7 @@
         <div class="and">&amp;</div>
         <div class="names">Anderson</div>
 
-        <p class="invite-msg">convidam vocês, com muito carinho para<br>celebrar o seu casamento</p>
+        <p class="invite-msg">convidam vocês, com muito carinho para<br>celebrar o nosso casamento</p>
 
         <div class="divider"></div>
 
@@ -972,7 +1009,7 @@
 
     // Endereço da função que salva as confirmações (não precisa mexer)
     api: "/api/rsvp",
-    confirmarAte: "Confirme até a data a combinar"  // ex.: "Confirme até 1º de março"
+    confirmarAte: "Confirme até 20/11/2026"  // ex.: "Confirme até 1º de março"
   };
 
   // ---------- preenche as folhas ----------
